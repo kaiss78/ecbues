@@ -1,0 +1,188 @@
+using System;
+using System.Data;
+using System.Data.SqlClient;
+
+namespace ecbues.cliente
+{
+    /// Descripcion de "db"
+    public class db
+    {
+        private string _Servidor;
+        private string _BasedeDatos;
+        private string _Usuario;
+        private string _Password;
+        private string _CadCon;
+        private SqlCommand _INSERT_COMMAND;
+        private SqlCommand _UPDATE_COMMAND;
+        private SqlCommand _DELETE_COMMAND;
+        private SqlCommand _SELECT_COMMAND;
+
+        public string ERROR; /// Error...
+
+        public string Servidor
+        {
+            get { return _Servidor; }
+            set { _Servidor = value; }
+        }
+
+        public string BasedeDatos
+        {
+            get { return _BasedeDatos; }
+            set { _BasedeDatos = value; }
+        }
+
+        public string Usuario
+        {
+            get { return _Usuario; }
+            set { _Usuario = value; }
+        }
+
+        public string Password
+        {
+            get { return _Password; }
+            set { _Password = value; }
+        }
+
+        public SqlCommand INSERT_COMMAND
+        {
+            get { return _INSERT_COMMAND; }
+            set { _INSERT_COMMAND = value; }
+        }
+
+        public SqlCommand UPDATE_COMMAND
+        {
+            get { return _UPDATE_COMMAND; }
+            set { _UPDATE_COMMAND = value; }
+        }
+
+        public SqlCommand DELETE_COMMAND
+        {
+            get { return _DELETE_COMMAND; }
+            set { _DELETE_COMMAND = value; }
+        }
+
+        public SqlCommand SELECT_COMMAND
+        {
+            get { return _SELECT_COMMAND; }
+            set { _SELECT_COMMAND = value; }
+        }
+
+        public SqlConnection CadenaConeccion() /// Obtener cadena de coneccion
+        {
+            _CadCon = "Data Source = " + this._Servidor + ";initial Catalog = " + this._BasedeDatos + ";user Id=" + this._Usuario + ";Password = " + this._Password;
+            SqlConnection cad = new SqlConnection(_CadCon);
+            return cad;
+        }
+
+        public bool ProbarConeccion(string Servidor, string BasedeDatos, string Usuario, string Password)
+        {
+            _CadCon = "Data Source = " + Servidor + ";initial Catalog = " + BasedeDatos + ";user Id=" + Usuario + ";Password = " + Password;
+            System.Data.SqlClient.SqlConnection oCon = new System.Data.SqlClient.SqlConnection(_CadCon);
+            try
+            {
+                oCon.Open();
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                this.ERROR = ex.ToString();
+                return false;
+            }
+            finally
+            {
+                oCon.Close();
+            }
+        }
+
+        public System.Data.DataTable SeleccionarCampos()
+        {
+            //string strCon = this.CadenaConeccion().ToString();
+            CadenaConeccion();
+            System.Data.DataSet ds = new System.Data.DataSet();
+            System.Data.SqlClient.SqlConnection oCon = new System.Data.SqlClient.SqlConnection(_CadCon);
+            System.Data.SqlClient.SqlDataAdapter da = new System.Data.SqlClient.SqlDataAdapter(this._SELECT_COMMAND.CommandText, oCon);
+
+            try
+            {
+                oCon.Open();
+                da.Fill(ds);
+            }
+            catch (System.Exception ex)
+            {
+                this.ERROR = ex.ToString();
+            }
+            finally
+            {
+                oCon.Close();
+            }
+            return ds.Tables[0];
+        }
+
+        public bool InsertarCampos()
+        {
+            CadenaConeccion();
+            System.Data.SqlClient.SqlConnection oCon = new System.Data.SqlClient.SqlConnection(_CadCon);
+            SqlCommand miConsulta = new SqlCommand(this.INSERT_COMMAND.CommandText, this.CadenaConeccion());
+
+            try
+            {
+                miConsulta.Connection.Open();
+                miConsulta.ExecuteNonQuery();
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                this.ERROR = ex.ToString();
+                return false;
+            }
+            finally
+            {
+                oCon.Close();
+            }
+        }
+
+        public bool BorrarCampos()
+        {
+            System.Data.SqlClient.SqlConnection oCon = new System.Data.SqlClient.SqlConnection(_CadCon);
+            SqlCommand miConsulta = new SqlCommand(this.DELETE_COMMAND.CommandText, this.CadenaConeccion());
+
+            try
+            {
+                miConsulta.Connection.Open();
+                miConsulta.ExecuteNonQuery();
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                this.ERROR = ex.ToString();
+                return false;
+            }
+            finally
+            {
+                oCon.Close();
+            }
+        }
+
+        public bool ActualizarCampos()
+        {
+            System.Data.SqlClient.SqlConnection oCon = new System.Data.SqlClient.SqlConnection(_CadCon);
+            SqlCommand miConsulta = new SqlCommand(this.UPDATE_COMMAND.CommandText, this.CadenaConeccion());
+
+            try
+            {
+                miConsulta.Connection.Open();
+                miConsulta.ExecuteNonQuery();
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                this.ERROR = ex.ToString();
+                return false;
+            }
+            finally
+            {
+                oCon.Close();
+            }
+        }
+    }
+}
