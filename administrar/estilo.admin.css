@@ -1,0 +1,131 @@
+html, body
+{
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	color: gray;
+	font-family: Perpetua;
+}
+body
+{
+	background: url( '../imagenes/azul.jpg' );
+	font-size: 16px;
+	color: gray;
+	padding: 0px;
+	margin: 0px;
+}
+
+a:link, a:hover, a:visited, a:active
+{
+	color: gray;
+	text-decoration: none;
+	border-bottom: 1px dashed #808080;
+}
+
+#cabezera
+{
+	width: 756px;
+	height: 100px;
+	background: #FFFFFF url(imagenes/cabeza.jpg);
+	margin: 0px;
+	padding: 0px;
+}
+
+img
+{
+	margin: 5px;
+}
+
+#finalpagina
+{
+	color: #3399cc;
+	font-size: 12px;
+	float: right;
+	margin-right: 30px;
+	margin-top: 15px;
+	font-weight: bold;
+}
+
+h1
+{
+	font-size: 22px;
+	color: #006699;
+	border-bottom: 1px dashed #000;
+	margin-bottom: 8px;
+	font-weight: bold;
+	padding-left: 8px;
+}
+h1:first-letter
+{
+	font-size: 24px;
+	color: #000;
+}
+
+h2
+{
+	font-size: 18px;
+	margin: 0px;
+	padding: 0px;
+	color: #006699;
+	border-bottom: 1px dashed #000;
+	margin-bottom: 8px;
+	padding-left: 8px;
+}
+h2:first-letter
+{
+	font-size: 20px;
+	color: #000;
+}
+
+h3
+{
+	font-size: 14px;
+	margin: 0px;
+	padding: 0px;
+	color: #006699;
+	border-bottom: 1px dashed #000;
+	margin-bottom: 8px;
+	padding-left: 8px;
+}
+h3:first-letter
+{
+	font-size: 16px;
+	color: #000;
+}
+
+#navcontainer li
+{
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+	position: relative;
+	height: 24px; /* espacio entre los items del menu... */
+	padding-left: 60px;
+}
+
+#navcontainer ul
+{
+	margin: 0;
+	padding: 0px;
+	width: 756px;
+	list-style-type: none;
+	height: 25px;
+	position: relative;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+#navcontainer a, #navcontainer a:visited
+{
+	display: inline;
+	color: #8C8C8C;
+	text-decoration: none;
+	font-weight: bolder;
+	margin: 0px;
+	height: 25px;
+}
+#navcontainer a:hover
+{
+	margin: 0px;
+	color: #8C8C8C;
+	text-decoration: underline;
+}

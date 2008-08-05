@@ -1,0 +1,5 @@
+bin\Debug\NicryptWebControls.dll
+bin\Debug\NicryptWebControls.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\NicryptWebControls.dll
+obj\Debug\NicryptWebControls.pdb
